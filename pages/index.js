@@ -1,16 +1,10 @@
 import Head from 'next/head'
 import { PostCard, Categories, PostWidget } from '../componets';
+import { getPosts } from '../services'
 
-
-//
-const posts = [
-  { title: 'React Testing', excerpt: ' React Testing' },
-  { title: 'React', excerpt: ' React ' }, 
-  
-]
 
 //mx axis set to auto margin bottom is 8 see tailwind docs.
-export default function Home () {
+export default function Home ({posts}) {
   return (
     <div className="container mx-auto px-1- mb-8"> 
       <Head>
@@ -37,3 +31,10 @@ export default function Home () {
   )
   }
 
+export async function getStaticProps() {
+  const posts = (await getPosts()) || [];
+
+  return {
+    props: { props }
+  }
+}
